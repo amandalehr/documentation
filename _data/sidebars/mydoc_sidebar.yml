@@ -121,6 +121,10 @@ entries:
     - title: Account management
       url: /aws_account_management.html
       output: web, pdf
+      
+    - title: Cost Notification System
+      url: /aws_cost_notification_system.html
+      output: web, pdf
 
     - title: EC2
       url: /aws_ec2.html
