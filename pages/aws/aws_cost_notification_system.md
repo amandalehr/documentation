@@ -11,7 +11,7 @@ folder: aws
 
 ## Introduction
 
-
+![pic0001](/documentation/images/aws/aws_cost_notification_system_001.png)
 
 
 
