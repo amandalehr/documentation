@@ -5,7 +5,7 @@ last_updated: September 5, 2017
 tags: [AWS, Lambda, SNS]
 summary: "AWS Email Notification System"
 sidebar: mydoc_sidebar
-permalink: aws_account_management.html
+permalink: aws_cost_notification_system.html
 folder: aws
 ---
 
