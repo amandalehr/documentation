@@ -18,13 +18,26 @@ DLT has set up a pipeline that keeps billing record in an S3 bucket, named as 50
 
 A detailed walkthrough of this system can be seen from the following.
 
-## 1, Billing Information in the S3 bucket
+### 1, Billing Information in the S3 bucket
 
 The billing record is located in the "509248752274-dlt-utilization" S3 bucket of the US East(N.Virginia) region. The following screenshot shows the outline of this bucket. The billing information of a certain day can be found in the compressed csv file with the corresponding date in the file name. For example, the billing information of Aug, 9th 2017 will appear in the file named as "509248752274-aws-billing-detailed-line-items-with-resources-and-tags-2017-08.csv.zip". However, the billing information of the first day of every month might appear in the zipped csv file of the previous month.
-![pic0001](/documentation/images/aws/aws_cost_notification_system_002.png)
+![pic0002](/documentation/images/aws/aws_cost_notification_system_002.png)
 
 
-## 2, 
+### 2, Lambda service
+
+The current version of lambda service was written in Python 3.6. The Lambda will get triggered once the "509248752274-dlt-utilization" S3 bucket gets updated. The Python code will download and unzip the most recently modified file from the bucket to local machine in the /tmp/ directory. Then the code will parse and summarize the billing information by aggregating costs based on user tags. If there is no any tag associated with the cost, the code will add up costs based on its resource ID. The code will add up all costs without either user tags nor resource ID. There are two types of costs, blended costs and unblended cost. A good explanation of blended and unblended rate can be found from this article: https://www.cloudyn.com/blog/blended-rates-vs-unblended-rates-real-life-use-case/
+
+The following screenshots show the configurations of the Lambda service.
+![pic0003](/documentation/images/aws/aws_cost_notification_system_003.png)
+![pic0004](/documentation/images/aws/aws_cost_notification_system_004.png)
+
+
+### 3, Simple Notification Service (SNS)
+
+After parsing and summarizing the file, the Lambda service will send a long string to the SNS containing all the cost information and its associated tags or resource ID. The screenshot below shows details of the SNS setup.
+![pic0005](/documentation/images/aws/aws_cost_notification_system_005.png)
+
 
 ## Links
 
@@ -32,6 +45,9 @@ The billing record is located in the "509248752274-dlt-utilization" S3 bucket of
 - The S3 bucket for billing information does not always get updated daily. The update might take a vacation during the holidays!!! So should we consider to send 2 day or 3 day summary information to users in order to avoid missing anything?
 
 - All time related information is based on UTC time zone!
+
+## Next steps
+- aggregate total
 
 ## Contact
 
