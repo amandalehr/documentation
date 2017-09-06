@@ -16,6 +16,15 @@ The Email notification system is designed to send cost summary on a daily basis 
 
 DLT has set up a pipeline that keeps billing record in an S3 bucket, named as 509248752274-dlt-utilization in the US East(N.Virginia) region. This bucket will gets updated on a daily basis. All the billing information is recorded in compressed csv format. The daily update will trigger the Lambda service, which is currently called "billing_test_jin" in the US East(N.Virginia) region. This service consists of a Python script that will download and parse the billing record from the S3 bucket. The script will aggregate cost information based on tags and resource type (e.g. Elastic Computing Service). For untagged billing, the script will summarize cost by resource ID if the resource ID appears in the file. Once the Lambda done with these, the SNS will be triggered. The SNS is currently named as "Billing_Notification" in the same region with the S3 bucket and the Lambda. The SNS will send Lambda cost summary to subscribed emails.
 
+A detailed walkthrough of this system can be seen from the following.
+
+## 1, Billing Information in the S3 bucket
+
+The billing record is located in the "509248752274-dlt-utilization" S3 bucket of the US East(N.Virginia) region. The following screenshot shows the outline of this bucket. The billing information of a certain day can be found in the compressed csv file with the corresponding date in the file name. For example, the billing information of Aug, 9th 2017 will appear in the file named as "509248752274-aws-billing-detailed-line-items-with-resources-and-tags-2017-08.csv.zip". However, the billing information of the first day of every month might appear in the zipped csv file of the previous month.
+![pic0001](/documentation/images/aws/aws_cost_notification_system_002.png)
+
+
+## 2, 
 
 ## Links
 
