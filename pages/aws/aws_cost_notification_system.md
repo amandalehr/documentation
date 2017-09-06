@@ -18,6 +18,8 @@ DLT has set up a pipeline that keeps billing record in an S3 bucket, named as 50
 
 A detailed walkthrough of this system can be seen from the following.
 
+## More details...
+
 ### 1, Billing Information in the S3 bucket
 
 The billing record is located in the "509248752274-dlt-utilization" S3 bucket of the US East(N.Virginia) region. The following screenshot shows the outline of this bucket. The billing information of a certain day can be found in the compressed csv file with the corresponding date in the file name. For example, the billing information of Aug, 9th 2017 will appear in the file named as "509248752274-aws-billing-detailed-line-items-with-resources-and-tags-2017-08.csv.zip". However, the billing information of the first day of every month might appear in the zipped csv file of the previous month.
