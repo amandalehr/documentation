@@ -47,3 +47,5 @@ allowed-tags:
   - cost
   - data_management
   - network_access
+  - Lambda
+  - SNS
